@@ -21,7 +21,9 @@ public class JobApplication {
     public Long getId() {
         return id;
     }
-
+    public LocalDate getApplicationDate() {
+    return applicationDate;
+}
     public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }
