@@ -1,5 +1,5 @@
 package com.applyflow.controller;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,4 +27,8 @@ public List<JobApplication> getAllJobApplications() {
     public JobApplication createJobApplication(@RequestBody JobApplication jobApplication) {
         return jobApplicationService.saveJobApplication(jobApplication);
     }
+    @GetMapping("/applications/{id}")
+public JobApplication getJobApplicationById(@PathVariable Long id) {
+    return jobApplicationService.getJobApplicationById(id);
+}
 }

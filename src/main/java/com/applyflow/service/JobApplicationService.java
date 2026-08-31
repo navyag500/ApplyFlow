@@ -20,4 +20,7 @@ public class JobApplicationService {
     public JobApplication saveJobApplication(JobApplication jobApplication) {
         return jobApplicationRepository.save(jobApplication);
     }
+    public JobApplication getJobApplicationById(Long id) {
+    return jobApplicationRepository.findById(id).orElse(null);
+}
 }
