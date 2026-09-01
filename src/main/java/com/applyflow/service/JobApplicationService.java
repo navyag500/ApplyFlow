@@ -23,4 +23,7 @@ public class JobApplicationService {
     public JobApplication getJobApplicationById(Long id) {
     return jobApplicationRepository.findById(id).orElse(null);
 }
+public void deleteJobApplication(Long id) {
+    jobApplicationRepository.deleteById(id);
+}
 }

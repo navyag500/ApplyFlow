@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.service.JobApplicationService;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 @RestController
 public class JobApplicationController {
     
@@ -30,5 +30,9 @@ public List<JobApplication> getAllJobApplications() {
     @GetMapping("/applications/{id}")
 public JobApplication getJobApplicationById(@PathVariable Long id) {
     return jobApplicationService.getJobApplicationById(id);
+}
+@DeleteMapping("/applications/{id}")
+public void deleteJobApplication(@PathVariable Long id) {
+    jobApplicationService.deleteJobApplication(id);
 }
 }
