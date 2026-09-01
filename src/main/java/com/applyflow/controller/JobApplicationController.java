@@ -1,4 +1,5 @@
 package com.applyflow.controller;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,5 +35,12 @@ public JobApplication getJobApplicationById(@PathVariable Long id) {
 @DeleteMapping("/applications/{id}")
 public void deleteJobApplication(@PathVariable Long id) {
     jobApplicationService.deleteJobApplication(id);
+}
+@PutMapping("/applications/{id}")
+public JobApplication updateJobApplication(
+        @PathVariable Long id,
+        @RequestBody JobApplication updatedApplication) {
+
+    return jobApplicationService.updateJobApplication(id, updatedApplication);
 }
 }
