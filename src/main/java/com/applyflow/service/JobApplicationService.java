@@ -29,6 +29,9 @@ public void deleteJobApplication(Long id) {
 public List<JobApplication> getJobApplicationsByStatus(String status) {
     return jobApplicationRepository.findByStatus(status);
 }
+public List<JobApplication> getJobApplicationsByCompany(String companyName) {
+    return jobApplicationRepository.findByCompanyName(companyName);
+}
 public JobApplication updateJobApplication(Long id, JobApplication updatedApplication) {
     JobApplication existingApplication = jobApplicationRepository.findById(id).orElse(null);
 

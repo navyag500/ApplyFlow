@@ -40,6 +40,10 @@ public void deleteJobApplication(@PathVariable Long id) {
 public List<JobApplication> getJobApplicationsByStatus(@PathVariable String status) {
     return jobApplicationService.getJobApplicationsByStatus(status);
 }
+@GetMapping("/applications/company/{companyName}")
+public List<JobApplication> getJobApplicationsByCompany(@PathVariable String companyName) {
+    return jobApplicationService.getJobApplicationsByCompany(companyName);
+}
 @PutMapping("/applications/{id}")
 public JobApplication updateJobApplication(
         @PathVariable Long id,
