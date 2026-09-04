@@ -1,7 +1,7 @@
 package com.applyflow.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.repository.JobApplicationRepository;
 
@@ -25,6 +25,9 @@ public class JobApplicationService {
 }
 public void deleteJobApplication(Long id) {
     jobApplicationRepository.deleteById(id);
+}
+public List<JobApplication> getJobApplicationsByStatus(String status) {
+    return jobApplicationRepository.findByStatus(status);
 }
 public JobApplication updateJobApplication(Long id, JobApplication updatedApplication) {
     JobApplication existingApplication = jobApplicationRepository.findById(id).orElse(null);
