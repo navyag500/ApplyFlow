@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.service.JobApplicationService;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 public class JobApplicationController {
     
@@ -22,7 +23,11 @@ public List<JobApplication> getAllJobApplications() {
     public JobApplicationController(JobApplicationService jobApplicationService) {
         this.jobApplicationService = jobApplicationService;
     }
-    
+    @GetMapping("/applications/search")
+public List<JobApplication> searchJobApplications(
+        @RequestParam String company) {
+    return jobApplicationService.searchJobApplicationsByCompany(company);
+}
 
     @PostMapping("/applications")
     public JobApplication createJobApplication(@RequestBody JobApplication jobApplication) {

@@ -32,6 +32,9 @@ public List<JobApplication> getJobApplicationsByStatus(String status) {
 public List<JobApplication> getJobApplicationsByCompany(String companyName) {
     return jobApplicationRepository.findByCompanyName(companyName);
 }
+public List<JobApplication> searchJobApplicationsByCompany(String companyName) {
+    return jobApplicationRepository.findByCompanyNameContainingIgnoreCase(companyName);
+}
 public JobApplication updateJobApplication(Long id, JobApplication updatedApplication) {
     JobApplication existingApplication = jobApplicationRepository.findById(id).orElse(null);
 
