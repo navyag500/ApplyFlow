@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class JobApplication {
@@ -13,17 +15,27 @@ public class JobApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private LocalDate applicationDate;
+
+    @NotBlank
     private String companyName;
+
+    @NotBlank
     private String jobRole;
+
+    @NotBlank
     private String status;
 
     public Long getId() {
         return id;
     }
+
     public LocalDate getApplicationDate() {
-    return applicationDate;
-}
+        return applicationDate;
+    }
+
     public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }

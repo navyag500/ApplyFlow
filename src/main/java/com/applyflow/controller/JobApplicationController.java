@@ -1,59 +1,78 @@
 package com.applyflow.controller;
-import org.springframework.web.bind.annotation.PutMapping;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import com.applyflow.entity.JobApplication;
 import com.applyflow.service.JobApplicationService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
+
 @RestController
 public class JobApplicationController {
-    
-    @GetMapping("/applications")
-public List<JobApplication> getAllJobApplications() {
-    return jobApplicationService.getAllJobApplications();
-}
 
     private final JobApplicationService jobApplicationService;
 
     public JobApplicationController(JobApplicationService jobApplicationService) {
         this.jobApplicationService = jobApplicationService;
     }
-    @GetMapping("/applications/search")
-public List<JobApplication> searchJobApplications(
-        @RequestParam String company) {
-    return jobApplicationService.searchJobApplicationsByCompany(company);
-}
 
     @PostMapping("/applications")
-    public JobApplication createJobApplication(@RequestBody JobApplication jobApplication) {
+    public JobApplication createJobApplication(
+            @Valid @RequestBody JobApplication jobApplication) {
+
         return jobApplicationService.saveJobApplication(jobApplication);
     }
-    @GetMapping("/applications/{id}")
-public JobApplication getJobApplicationById(@PathVariable Long id) {
-    return jobApplicationService.getJobApplicationById(id);
-}
-@DeleteMapping("/applications/{id}")
-public void deleteJobApplication(@PathVariable Long id) {
-    jobApplicationService.deleteJobApplication(id);
-}
-@GetMapping("/applications/status/{status}")
-public List<JobApplication> getJobApplicationsByStatus(@PathVariable String status) {
-    return jobApplicationService.getJobApplicationsByStatus(status);
-}
-@GetMapping("/applications/company/{companyName}")
-public List<JobApplication> getJobApplicationsByCompany(@PathVariable String companyName) {
-    return jobApplicationService.getJobApplicationsByCompany(companyName);
-}
-@PutMapping("/applications/{id}")
-public JobApplication updateJobApplication(
-        @PathVariable Long id,
-        @RequestBody JobApplication updatedApplication) {
 
-    return jobApplicationService.updateJobApplication(id, updatedApplication);
-}
+    @GetMapping("/applications")
+    public List<JobApplication> getAllJobApplications() {
+        return jobApplicationService.getAllJobApplications();
+    }
+
+    @GetMapping("/applications/{id}")
+    public JobApplication getJobApplicationById(@PathVariable Long id) {
+        return jobApplicationService.getJobApplicationById(id);
+    }
+
+    @PutMapping("/applications/{id}")
+    public JobApplication updateJobApplication(
+            @PathVariable Long id,
+            @Valid @RequestBody JobApplication updatedApplication) {
+
+        return jobApplicationService.updateJobApplication(id, updatedApplication);
+    }
+
+    @DeleteMapping("/applications/{id}")
+    public void deleteJobApplication(@PathVariable Long id) {
+        jobApplicationService.deleteJobApplication(id);
+    }
+
+    @GetMapping("/applications/status/{status}")
+    public List<JobApplication> getJobApplicationsByStatus(
+            @PathVariable String status) {
+
+        return jobApplicationService.getJobApplicationsByStatus(status);
+    }
+
+    @GetMapping("/applications/company/{companyName}")
+    public List<JobApplication> getJobApplicationsByCompany(
+            @PathVariable String companyName) {
+
+        return jobApplicationService.getJobApplicationsByCompany(companyName);
+    }
+
+    @GetMapping("/applications/search")
+    public List<JobApplication> searchJobApplications(
+            @RequestParam String company) {
+
+        return jobApplicationService.searchJobApplicationsByCompany(company);
+    }
 }
