@@ -8,4 +8,5 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
 List<JobApplication> findByStatus(String status);
 List<JobApplication> findByCompanyName(String companyName);
 List<JobApplication> findByCompanyNameContainingIgnoreCase(String companyName);
+long countByStatus(String status);
 }

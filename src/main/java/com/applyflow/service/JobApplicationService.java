@@ -5,6 +5,8 @@ import java.util.List;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.repository.JobApplicationRepository;
 import com.applyflow.exception.ResourceNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 @Service
 public class JobApplicationService {
     public List<JobApplication> getAllJobApplications() {
@@ -20,6 +22,18 @@ public class JobApplicationService {
     public JobApplication saveJobApplication(JobApplication jobApplication) {
         return jobApplicationRepository.save(jobApplication);
     }
+    public Map<String, Long> getApplicationStatistics() {
+
+    Map<String, Long> statistics = new HashMap<>();
+
+    statistics.put("total", jobApplicationRepository.count());
+    statistics.put("applied", jobApplicationRepository.countByStatus("Applied"));
+    statistics.put("interview", jobApplicationRepository.countByStatus("Interview"));
+    statistics.put("rejected", jobApplicationRepository.countByStatus("Rejected"));
+    statistics.put("offer", jobApplicationRepository.countByStatus("Offer"));
+
+    return statistics;
+}
     public JobApplication getJobApplicationById(Long id) {
     return jobApplicationRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException(

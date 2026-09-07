@@ -1,7 +1,7 @@
 package com.applyflow.controller;
 
 import java.util.List;
-
+import java.util.Map;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,6 +68,10 @@ public class JobApplicationController {
 
         return jobApplicationService.getJobApplicationsByCompany(companyName);
     }
+    @GetMapping("/applications/stats")
+public Map<String, Long> getApplicationStatistics() {
+    return jobApplicationService.getApplicationStatistics();
+}
 
     @GetMapping("/applications/search")
     public List<JobApplication> searchJobApplications(
