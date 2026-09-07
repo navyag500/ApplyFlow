@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.repository.JobApplicationRepository;
-
+import com.applyflow.exception.ResourceNotFoundException;
 @Service
 public class JobApplicationService {
     public List<JobApplication> getAllJobApplications() {
@@ -21,7 +21,9 @@ public class JobApplicationService {
         return jobApplicationRepository.save(jobApplication);
     }
     public JobApplication getJobApplicationById(Long id) {
-    return jobApplicationRepository.findById(id).orElse(null);
+    return jobApplicationRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                    "Job application not found with id: " + id));
 }
 public void deleteJobApplication(Long id) {
     jobApplicationRepository.deleteById(id);
