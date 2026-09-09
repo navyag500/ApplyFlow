@@ -1,7 +1,8 @@
 package com.applyflow.service;
 import java.util.List;
+import com.applyflow.entity.ApplicationStatus;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
 import com.applyflow.entity.JobApplication;
 import com.applyflow.repository.JobApplicationRepository;
 import com.applyflow.exception.ResourceNotFoundException;
@@ -26,12 +27,10 @@ public class JobApplicationService {
 
     Map<String, Long> statistics = new HashMap<>();
 
-    statistics.put("total", jobApplicationRepository.count());
-    statistics.put("applied", jobApplicationRepository.countByStatus("Applied"));
-    statistics.put("interview", jobApplicationRepository.countByStatus("Interview"));
-    statistics.put("rejected", jobApplicationRepository.countByStatus("Rejected"));
-    statistics.put("offer", jobApplicationRepository.countByStatus("Offer"));
-
+    statistics.put("applied", jobApplicationRepository.countByStatus(ApplicationStatus.APPLIED));
+statistics.put("interview", jobApplicationRepository.countByStatus(ApplicationStatus.INTERVIEW));
+statistics.put("rejected", jobApplicationRepository.countByStatus(ApplicationStatus.REJECTED));
+statistics.put("offer", jobApplicationRepository.countByStatus(ApplicationStatus.OFFER));
     return statistics;
 }
     public JobApplication getJobApplicationById(Long id) {
@@ -42,7 +41,7 @@ public class JobApplicationService {
 public void deleteJobApplication(Long id) {
     jobApplicationRepository.deleteById(id);
 }
-public List<JobApplication> getJobApplicationsByStatus(String status) {
+public List<JobApplication> getJobApplicationsByStatus(ApplicationStatus status) {
     return jobApplicationRepository.findByStatus(status);
 }
 public List<JobApplication> getJobApplicationsByCompany(String companyName) {

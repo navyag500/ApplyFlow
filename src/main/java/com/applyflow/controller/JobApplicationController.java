@@ -1,5 +1,5 @@
 package com.applyflow.controller;
-
+import com.applyflow.entity.ApplicationStatus;
 import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,11 +56,10 @@ public class JobApplicationController {
     }
 
     @GetMapping("/applications/status/{status}")
-    public List<JobApplication> getJobApplicationsByStatus(
-            @PathVariable String status) {
-
-        return jobApplicationService.getJobApplicationsByStatus(status);
-    }
+public List<JobApplication> getJobApplicationsByStatus(
+        @PathVariable ApplicationStatus status) {
+    return jobApplicationService.getJobApplicationsByStatus(status);
+}
 
     @GetMapping("/applications/company/{companyName}")
     public List<JobApplication> getJobApplicationsByCompany(

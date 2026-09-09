@@ -25,9 +25,8 @@ public class JobApplication {
     @NotBlank
     private String jobRole;
 
-    @NotBlank
-    private String status;
-
+   @NotNull
+private ApplicationStatus status;
     public Long getId() {
         return id;
     }
@@ -59,12 +58,11 @@ public class JobApplication {
     public void setJobRole(String jobRole) {
         this.jobRole = jobRole;
     }
+public ApplicationStatus getStatus() {
+    return status;
+}
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+public void setStatus(ApplicationStatus status) {
+    this.status = status;
+}
 }
