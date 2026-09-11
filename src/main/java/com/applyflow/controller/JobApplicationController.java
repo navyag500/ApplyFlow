@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.data.domain.Page;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.service.JobApplicationService;
 
@@ -24,6 +24,13 @@ public class JobApplicationController {
     public JobApplicationController(JobApplicationService jobApplicationService) {
         this.jobApplicationService = jobApplicationService;
     }
+    @GetMapping("/applications/page")
+public Page<JobApplication> getApplicationsPaginated(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size) {
+
+    return jobApplicationService.getApplicationsPaginated(page, size);
+}
 
     @PostMapping("/applications")
     public JobApplication createJobApplication(
