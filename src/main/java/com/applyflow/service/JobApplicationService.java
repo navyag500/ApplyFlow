@@ -33,6 +33,9 @@ statistics.put("rejected", jobApplicationRepository.countByStatus(ApplicationSta
 statistics.put("offer", jobApplicationRepository.countByStatus(ApplicationStatus.OFFER));
     return statistics;
 }
+public List<JobApplication> getApplicationsSortedByDate() {
+    return jobApplicationRepository.findAllByOrderByApplicationDateDesc();
+}
     public JobApplication getJobApplicationById(Long id) {
     return jobApplicationRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException(

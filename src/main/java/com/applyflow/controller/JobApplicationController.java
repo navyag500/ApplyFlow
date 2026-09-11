@@ -54,6 +54,10 @@ public class JobApplicationController {
     public void deleteJobApplication(@PathVariable Long id) {
         jobApplicationService.deleteJobApplication(id);
     }
+    @GetMapping("/applications/sorted")
+public List<JobApplication> getApplicationsSortedByDate() {
+    return jobApplicationService.getApplicationsSortedByDate();
+}
 
     @GetMapping("/applications/status/{status}")
 public List<JobApplication> getJobApplicationsByStatus(
