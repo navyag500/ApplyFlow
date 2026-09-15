@@ -31,6 +31,11 @@ public Page<JobApplication> getApplicationsPaginated(
 
     return jobApplicationService.getApplicationsPaginated(page, size);
 }
+@GetMapping("/applications/role/{jobRole}")
+public List<JobApplication> getJobApplicationsByRole(
+        @PathVariable String jobRole) {
+    return jobApplicationService.searchJobApplicationsByRole(jobRole);
+}
 
     @PostMapping("/applications")
     public JobApplication createJobApplication(

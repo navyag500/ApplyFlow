@@ -14,6 +14,9 @@ public class JobApplicationService {
     public List<JobApplication> getAllJobApplications() {
     return jobApplicationRepository.findAll();
 }
+public List<JobApplication> searchJobApplicationsByRole(String jobRole) {
+    return jobApplicationRepository.findByJobRoleContainingIgnoreCase(jobRole);
+}
 
     private final JobApplicationRepository jobApplicationRepository;
 

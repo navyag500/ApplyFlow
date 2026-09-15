@@ -10,4 +10,5 @@ List<JobApplication> findByCompanyName(String companyName);
 List<JobApplication> findByCompanyNameContainingIgnoreCase(String companyName);
 long countByStatus(ApplicationStatus status);
 List<JobApplication> findAllByOrderByApplicationDateDesc();
+List<JobApplication> findByJobRoleContainingIgnoreCase(String jobRole);
 }
