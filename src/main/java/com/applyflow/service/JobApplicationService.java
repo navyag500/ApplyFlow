@@ -61,11 +61,9 @@ public List<JobApplication> searchJobApplicationsByCompany(String companyName) {
     return jobApplicationRepository.findByCompanyNameContainingIgnoreCase(companyName);
 }
 public JobApplication updateJobApplication(Long id, JobApplication updatedApplication) {
-    JobApplication existingApplication = jobApplicationRepository.findById(id).orElse(null);
-
-    if (existingApplication == null) {
-        return null;
-    }
+    JobApplication existingApplication = jobApplicationRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException(
+                "Job application not found with id: " + id));
 
     existingApplication.setCompanyName(updatedApplication.getCompanyName());
     existingApplication.setJobRole(updatedApplication.getJobRole());
