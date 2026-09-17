@@ -49,7 +49,12 @@ public List<JobApplication> getApplicationsSortedByDate() {
                     "Job application not found with id: " + id));
 }
 public void deleteJobApplication(Long id) {
-    jobApplicationRepository.deleteById(id);
+
+    JobApplication existingApplication = jobApplicationRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                    "Job application not found with id: " + id));
+
+    jobApplicationRepository.delete(existingApplication);
 }
 public List<JobApplication> getJobApplicationsByStatus(ApplicationStatus status) {
     return jobApplicationRepository.findByStatus(status);
