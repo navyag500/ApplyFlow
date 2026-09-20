@@ -73,8 +73,11 @@ public List<JobApplication> getApplicationsSortedByDate() {
 
     @GetMapping("/applications/status/{status}")
 public List<JobApplication> getJobApplicationsByStatus(
-        @PathVariable ApplicationStatus status) {
-    return jobApplicationService.getJobApplicationsByStatus(status);
+        @PathVariable String status) {
+
+    return jobApplicationService.getJobApplicationsByStatus(
+            ApplicationStatus.fromValue(status)
+    );
 }
 
     @GetMapping("/applications/company/{companyName}")
