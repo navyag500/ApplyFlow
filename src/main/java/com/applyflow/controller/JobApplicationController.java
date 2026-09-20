@@ -24,10 +24,17 @@ public class JobApplicationController {
     public JobApplicationController(JobApplicationService jobApplicationService) {
         this.jobApplicationService = jobApplicationService;
     }
-    @GetMapping("/applications/page")
+    
+@GetMapping("/applications/page")
 public Page<JobApplication> getApplicationsPaginated(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "5") int size) {
+
+    if (page < 0 || size <= 0) {
+        throw new IllegalArgumentException(
+                "Page must be 0 or greater and size must be greater than 0"
+        );
+    }
 
     return jobApplicationService.getApplicationsPaginated(page, size);
 }
