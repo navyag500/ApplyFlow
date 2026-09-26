@@ -13,11 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import com.applyflow.entity.JobApplication;
 import com.applyflow.service.JobApplicationService;
-
+import org.springframework.web.bind.annotation.PatchMapping;
 import jakarta.validation.Valid;
 
 @RestController
 public class JobApplicationController {
+    @PatchMapping("/applications/{id}")
+public JobApplication patchJobApplication(
+        @PathVariable Long id,
+        @RequestBody JobApplication updatedApplication) {
+
+    return jobApplicationService.patchJobApplication(id, updatedApplication);
+}
 
     private final JobApplicationService jobApplicationService;
 

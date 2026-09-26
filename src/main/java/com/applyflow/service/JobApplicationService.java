@@ -11,6 +11,32 @@ import java.util.HashMap;
 import java.util.Map;
 @Service
 public class JobApplicationService {
+    public JobApplication patchJobApplication(
+        Long id,
+        JobApplication updatedApplication) {
+
+    JobApplication existingApplication = jobApplicationRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException(
+                    "Job application not found with id: " + id));
+
+    if (updatedApplication.getCompanyName() != null) {
+        existingApplication.setCompanyName(updatedApplication.getCompanyName());
+    }
+
+    if (updatedApplication.getJobRole() != null) {
+        existingApplication.setJobRole(updatedApplication.getJobRole());
+    }
+
+    if (updatedApplication.getStatus() != null) {
+        existingApplication.setStatus(updatedApplication.getStatus());
+    }
+
+    if (updatedApplication.getApplicationDate() != null) {
+        existingApplication.setApplicationDate(updatedApplication.getApplicationDate());
+    }
+
+    return jobApplicationRepository.save(existingApplication);
+}
     public List<JobApplication> getAllJobApplications() {
     return jobApplicationRepository.findAll();
 }
