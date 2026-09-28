@@ -9,11 +9,12 @@ import com.applyflow.repository.JobApplicationRepository;
 import com.applyflow.exception.ResourceNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
+import com.applyflow.dto.JobApplicationPatchRequest;
 @Service
 public class JobApplicationService {
     public JobApplication patchJobApplication(
         Long id,
-        JobApplication updatedApplication) {
+         JobApplicationPatchRequest updatedApplication) {
 
     JobApplication existingApplication = jobApplicationRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException(
